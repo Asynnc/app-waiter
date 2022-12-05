@@ -1,0 +1,42 @@
+  Category
+    List
+    Create
+    Read
+    Update
+    Delete
+
+  Product
+    List
+    List Product By Category
+    Create
+    Read
+    Update
+    Delete
+
+  Orders
+    List
+    Create
+    Read
+    Update
+    Change Order Status
+    Delete/Cancel Order
+
+
+"[
+  {
+    "name": "Mussarela",
+    "icon": "🧀"
+  },
+  {
+    "name": "Parmesão",
+    "icon": "🧀"
+  },
+  {
+    "name": "Prato",
+    "icon": "🧀"
+  },
+  {
+    "name": "Coalho",
+    "icon": "🧀"
+  }
+]"
