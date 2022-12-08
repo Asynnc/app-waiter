@@ -1,4 +1,4 @@
-import Router from 'express';
+import Router, { Request, Response } from 'express';
 import path from 'node:path';
 import cuid from 'cuid';
 import multer from 'multer';
@@ -24,6 +24,14 @@ const upload = multer({
     }
   })
 });
+
+router.get('/', (request: Request, response: Response) => {
+  return response.json({
+    application: 'AppWaiter Api',
+    message: 'Api AppWaiter Nodejs Online'
+  });
+});
+
 
 router.get('/categories', listCategories);
 
