@@ -1,12 +1,13 @@
 
+import cors from 'cors';
+import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
-import { router } from './router';
-import cors from 'cors';
 import path from 'node:path';
 import { LogRequests } from './app/middlewares/logRequests';
+import { router } from './router';
 
-mongoose.connect('mongodb://localhost:27017/?authSource=local')
+mongoose.connect(`${process.env.MongoDB_URL_Cloud}`)
   .then(
     () => {
       const app = express();
@@ -15,7 +16,7 @@ mongoose.connect('mongodb://localhost:27017/?authSource=local')
       app.use(LogRequests);
       app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
       app.use('/api', router);
-      app.listen(3001, () => {
+      app.listen( process.env.PORT_SERVER , () => {
         console.log('✅ Server listening on port 3001');
       });
     }
