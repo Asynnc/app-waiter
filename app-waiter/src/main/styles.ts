@@ -30,6 +30,11 @@ min-height: 110px;
 padding: 16px 24px;
 `;
 
+export const CenteredContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const FooterContainer = styled.SafeAreaView`
 

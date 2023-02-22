@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { FlatList } from 'react-native';
-import { products } from '../../mocks/products';
 import { Product } from '../../types/Product';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { PlusCircle } from '../Icons/PlusCircle';
@@ -10,9 +9,10 @@ import { AddToCartButton, ProductContainer, ProductDetails, ProductImage, Separa
 
 interface MenuProps {
   onAddToCart: (product: Product) => void;
+  products: Product[]
 }
 
-export function Menu({ onAddToCart }: MenuProps) {
+export function Menu({ onAddToCart, products }: MenuProps) {
 
   const [isVisible, setIsVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<null | Product>(null);
