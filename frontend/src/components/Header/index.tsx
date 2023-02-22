@@ -1,5 +1,5 @@
-import logo from '../../assets/images/logo.svg';
-import { HeaderStyle, Content } from './styles';
+import logo from '../../assets/images/Procafeinar.svg';
+import { Content, HeaderStyle } from './styles';
 
 export function Header() {
   return (
@@ -10,7 +10,7 @@ export function Header() {
           <h2>Acompanhe os pedidos dos clientes</h2>
         </div>
 
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" width={250}/>
       </Content>
     </HeaderStyle>
   );

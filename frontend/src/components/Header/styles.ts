@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const HeaderStyle = styled.header`
   display: flex;
-  background: #D73835;
+  background: #6F4E37;
   justify-content: center;
   height: 198px;
   align-items: center;
@@ -25,7 +25,7 @@ justify-content: space-between;
     font-weight: 400;
     font-size: 16px;
     opacity: 0.9;
-    margin-top: 6 px;
+    margin-top: 6px;
   }
 }
 `;

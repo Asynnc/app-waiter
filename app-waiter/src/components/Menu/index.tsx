@@ -35,7 +35,7 @@ export function Menu({ onAddToCart, products }: MenuProps) {
           return (
             <ProductContainer onPress={() => handleOpenModal(product)}>
               <ProductImage source={{
-                uri: `http://192.168.1.102:3001/uploads/${product.imagePath}`
+                uri: `http://localhost:3001/uploads/${product.imagePath}`
               }} />
               <ProductDetails>
                 <Text weight='SemiBold'>{product.name}</Text>

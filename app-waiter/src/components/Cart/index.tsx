@@ -40,8 +40,6 @@ export function Cart({ cartItems, onAdd, onRemove, onConfirmedOrder, selectedTab
       }))
     };
 
-    console.log(JSON.stringify(payload, null, 2));
-
     await api.post('/orders', payload).then(
       () => {
         setIsLoading(false);
@@ -74,7 +72,7 @@ export function Cart({ cartItems, onAdd, onRemove, onConfirmedOrder, selectedTab
             <Item>
 
               <ProductContainer>
-                <Image source={{ uri: `http://192.168.1.102:3001/uploads/${cartItem.product.imagePath}` }} />
+                <Image source={{ uri: `http://localhost:3001/uploads/${cartItem.product.imagePath}` }} />
                 <QuantityContainer>
                   <Text size={14} color={'#666'}> {cartItem.quantity}* </Text>
                 </QuantityContainer>

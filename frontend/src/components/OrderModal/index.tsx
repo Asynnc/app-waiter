@@ -1,19 +1,22 @@
-import { Overlay, Wrapper, StatusContainer, OrderDetails, Actions } from './styles';
+import { useEffect } from 'react';
 import closeButtonIcon from '../../assets/images/close-icon.svg';
 import { OrderProps } from '../../types/Order';
 import { formatCurrency } from '../../utils/formatCurrency';
-import { useEffect } from 'react';
+import { Actions, OrderDetails, Overlay, StatusContainer, Wrapper } from './styles';
 
 interface OrderModalProps {
   isVisible: boolean;
   order: OrderProps | null;
   onClose: () => void;
+  onCancelOrder: () => Promise<void>;
+  onChangeOrderStatus: () => void;
+  isLoading: boolean;
 }
 
-export function OrderModal({ isVisible, order, onClose }: OrderModalProps) {
+export function OrderModal({ isVisible, order, onClose, onCancelOrder, isLoading, onChangeOrderStatus }: OrderModalProps) {
 
   useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent){
+    function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         onClose();
       }
@@ -34,6 +37,9 @@ export function OrderModal({ isVisible, order, onClose }: OrderModalProps) {
     return total + (product.price * quantity);
   }, 0);
 
+  function handleCancelOrder() {
+    onCancelOrder();
+  }
 
   return (
     <Overlay>
@@ -85,12 +91,24 @@ export function OrderModal({ isVisible, order, onClose }: OrderModalProps) {
 
         </OrderDetails>
         <Actions>
-          <button type='button' className='primary'>
-            <span>👨🏻‍🍳</span>
-            <span>INICIAR PREPARAÇÃO</span>
-          </button>
+          {order.status !== 'DONE' && (
+            <button type='button' className='primary' disabled={isLoading} onClick={onChangeOrderStatus}>
+              <span>
+                {order.status === 'WAITING' && '👨🏻‍🍳'}
+                {order.status === 'IN_PRODUCTION' && '✅'}
+              </span>
+              <span>
+                {order.status === 'WAITING' && 'INICIAR PRODUÇÃO'}
+                {order.status === 'IN_PRODUCTION' && 'CONCLUIR PEDIDO'}
+              </span>
+            </button>
+          )}
 
-          <button type='button' className='secondary'>
+          <button
+            type='button'
+            className='secondary'
+            onClick={handleCancelOrder}
+            disabled={isLoading}>
             <span>CANCELAR PEDIDO</span>
           </button>
         </Actions>
