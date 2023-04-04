@@ -2,6 +2,7 @@ import cuid from 'cuid';
 import Router, { Request, Response } from 'express';
 import multer from 'multer';
 import path from 'node:path';
+import { authenticate } from './app/useCases/Auth/auth';
 import { createCategories } from './app/useCases/Category/createCategory';
 import { listCategories } from './app/useCases/Category/listCategory';
 import { listProductsByCategory } from './app/useCases/Category/listProductsByCategory';
@@ -28,8 +29,8 @@ const upload = multer({
 
 router.get('/', (request: Request, response: Response) => {
   return response.json({
-    application: 'AppWaiter Api',
-    message: 'Api AppWaiter Nodejs Online'
+    application: 'The Coffee Class Api',
+    message: 'Api The Coffee Class Nodejs Online'
   });
 });
 
@@ -53,4 +54,7 @@ router.patch('/orders/:orderId', changeOrderStatus);
 router.delete('/orders/:orderId', cancelOrder);
 
 router.post('/users', createUser);
+
+router.post('/auth', authenticate);
+
 
