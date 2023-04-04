@@ -1,16 +1,17 @@
-import Router, { Request, Response } from 'express';
-import path from 'node:path';
 import cuid from 'cuid';
+import Router, { Request, Response } from 'express';
 import multer from 'multer';
+import path from 'node:path';
 import { createCategories } from './app/useCases/Category/createCategory';
 import { listCategories } from './app/useCases/Category/listCategory';
+import { listProductsByCategory } from './app/useCases/Category/listProductsByCategory';
+import { cancelOrder } from './app/useCases/Order/cancelOrder';
+import { changeOrderStatus } from './app/useCases/Order/changeOrderStatus';
+import { createOrder } from './app/useCases/Order/createOrder';
+import { listOrders } from './app/useCases/Order/listOrder';
 import { createProducts } from './app/useCases/Product/createProduct';
 import { listProducts } from './app/useCases/Product/listProduct';
-import { listProductsByCategory } from './app/useCases/Category/listProductsByCategory';
-import { listOrders } from './app/useCases/Order/listOrder';
-import { createOrder } from './app/useCases/Order/createOrder';
-import { changeOrderStatus } from './app/useCases/Order/changeOrderStatus';
-import { cancelOrder } from './app/useCases/Order/cancelOrder';
+import { createUser } from './app/useCases/User/createUser';
 
 export const router = Router();
 
@@ -50,3 +51,6 @@ router.post('/orders', createOrder);
 router.patch('/orders/:orderId', changeOrderStatus);
 
 router.delete('/orders/:orderId', cancelOrder);
+
+router.post('/users', createUser);
+
