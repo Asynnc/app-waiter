@@ -17,21 +17,18 @@ const server = http.createServer(app);
 export const io = new Server(server);
 
 mongoose.connect(`${process.env.MongoDB_URL_Cloud}`)
-  .then(
-    () => {
-      app.use(express.json());
-      app.use(cors());
-      app.use(LogRequests);
-      app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
-      app.use('/api', router);
-      app.use('/api/v2', authRouter);
-      app.use(globalError);
-
-      server.listen(process.env.PORT_SERVER, () => {
-        console.log('✅ MongoDB Connected!');
-        console.log('✅ Server listening on port 3001');
-      });
-    }
-  )
+  .then(() => console.log('✅ MongoDB Connected!'))
   .catch((err) => console.error(err));
+
+app.use(express.json());
+app.use(cors());
+app.use(LogRequests);
+app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
+app.use('/api', router);
+app.use('/api/v2', authRouter);
+app.use(globalError);
+
+server.listen(process.env.PORT_SERVER, () => {
+  console.log(`✅ Server listening on port ${process.env.PORT_SERVER}`);
+});
 
