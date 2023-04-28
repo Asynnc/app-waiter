@@ -8,7 +8,7 @@ categoryRouter.post('/', (request: Request, response: Response) => {
   return createCategoryController.handle(request, response);
 });
 
-categoryRouter.post('/', (request: Request, response: Response) => {
+categoryRouter.get('/', (request: Request, response: Response) => {
   return listCategoryController.handle(request, response);
 });
 
