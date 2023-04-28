@@ -6,6 +6,7 @@ import { authenticate } from './app/useCases/Auth/auth';
 import { createCategories } from './app/useCases/Category/createCategory';
 import { listCategories } from './app/useCases/Category/listCategory';
 import { listProductsByCategory } from './app/useCases/Category/listProductsByCategory';
+import { createFeedback } from './app/useCases/Feedback/createFeedback';
 import { cancelOrder } from './app/useCases/Order/cancelOrder';
 import { changeOrderStatus } from './app/useCases/Order/changeOrderStatus';
 import { createOrder } from './app/useCases/Order/createOrder';
@@ -43,7 +44,7 @@ router.get('/categories/:categoryId/products', listProductsByCategory);
 
 router.get('/products', listProducts);
 
-router.post('/products', upload.single('image') , createProducts);
+router.post('/products', upload.single('image'), createProducts);
 
 router.get('/orders', listOrders);
 
@@ -56,5 +57,8 @@ router.delete('/orders/:orderId', cancelOrder);
 router.post('/users', createUser);
 
 router.post('/auth', authenticate);
+
+router.post('/feedback', createFeedback);
+
 
 
