@@ -9,9 +9,9 @@ import path from 'node:path';
 import { Server } from 'socket.io';
 import globalError from './app/middlewares/globalError';
 import { LogRequests } from './app/middlewares/logRequests';
+import './app/middlewares/tracer';
 import { authRouter } from './app/modules/Auth/routes/auth.routes';
 import { router } from './router';
-
 const app = express();
 const server = http.createServer(app);
 export const io = new Server(server);
