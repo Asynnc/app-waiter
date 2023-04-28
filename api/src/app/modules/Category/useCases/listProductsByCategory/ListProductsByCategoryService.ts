@@ -7,6 +7,6 @@ export class ListProductsByCategoryService {
       .where('category')
       .equals(id);
 
-    return products;
+    return products || [];
   }
 }
