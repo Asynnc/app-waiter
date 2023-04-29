@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "the-coffee-class-api",
   "version": "2.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -19,11 +19,11 @@
     "eslint": "^8.29.0",
     "nodemon": "^2.0.20",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.3",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/node": "^18.15.11"
   },
   "dependencies": {
-    "@types/bcryptjs": "^2.4.2",
-    "@types/node": "^18.15.11",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cuid": "^2.1.8",
