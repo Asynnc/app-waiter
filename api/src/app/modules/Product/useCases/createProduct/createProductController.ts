@@ -6,11 +6,15 @@ export class CreateProductController {
 
   async handle(request: Request, response: Response) {
 
-    const { name, description, image, price, category, ingredients } = request.body;
+    const { name, description, price, category, ingredients } = request.body;
+
+    const image = request.file?.filename;
+
+    const ingredientsParsed = JSON.parse(ingredients);
 
     const createProductService = new CreateProductService;
 
-    const result = await createProductService.execute({ name, description, image, price, category, ingredients });
+    const result = await createProductService.execute({ name, description, image, price, category, ingredients: ingredientsParsed });
 
     return response.json(result);
   }

@@ -6,11 +6,11 @@ export class ListProductsByCategoryController {
 
   async handle(request: Request, response: Response) {
 
-    const { categoryID } = request.params;
+    const { categoryId } = request.params;
 
     const listCategoryService = new ListProductsByCategoryService;
 
-    const result = await listCategoryService.execute({ id: categoryID });
+    const result = await listCategoryService.execute({ id: categoryId });
 
     return response.json(result);
   }

@@ -1,4 +1,4 @@
-import { Product } from '../../../../models/Product';
+import { Product } from '../../../../core/shared/infra/database/mongodb/models/Product';
 import { ICreateProduct } from './createProductDTO';
 
 export class CreateProductService {

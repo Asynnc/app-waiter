@@ -1,5 +1,5 @@
-import { AppError } from '../../../../errors';
-import { Category } from '../../../../models/Category';
+import { AppError } from '../../../../core/shared/http/errors';
+import { Category } from '../../../../core/shared/infra/database/mongodb/models/Category';
 import { ICreateCategory } from './CreateCategoryDTO';
 
 export class CreateCategoryService {

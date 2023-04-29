@@ -1,5 +1,5 @@
-import { AppError, MissingParamError } from '../../../../errors';
-import { Feedback } from '../../../../models/Feedback';
+import { AppError, MissingParamError } from '../../../../core/shared/http/errors';
+import { Feedback } from '../../../../core/shared/infra/database/mongodb/models/Feedback';
 import { ICreateFeedback } from './createFeedbackDTO';
 
 export class CreateFeedbackService {

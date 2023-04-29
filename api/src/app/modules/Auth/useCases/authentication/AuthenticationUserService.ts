@@ -1,8 +1,8 @@
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import AuthConfig from '../../../../config/auth';
-import { AppError } from '../../../../errors';
-import { User } from '../../../../models/User';
+import { AppError } from '../../../../core/shared/http/errors';
+import { User } from '../../../../core/shared/infra/database/mongodb/models/User';
 import { IAuthRequest, IAuthResponse } from './AuthenticationUserDTO';
 
 export class AuthenticationUserService {
