@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsnd --inspect --transpile-only --respawn --ignore-watch node_modules src/app/core/shared/http/server.ts",
-    "start": "yarn build && node dist/index.js"
+    "start": "yarn build && node dist/core/shared/http/server.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
