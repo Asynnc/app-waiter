@@ -1,5 +1,5 @@
 import { AppError, MissingParamError } from '../../../../core/shared/http/errors';
-import { Feedback } from '../../../../core/shared/infra/database/mongodb/models/Feedback';
+import { SubmitFeedbackService } from '../../../Mail/useCases/submitFeedback/submitFeedbackService';
 import { ICreateFeedback } from './createFeedbackDTO';
 
 export class CreateFeedbackService {
@@ -12,16 +12,23 @@ export class CreateFeedbackService {
       throw new MissingParamError('Comment');
     }
 
+    const feedbackService = new SubmitFeedbackService;
+
     if (screenshot && !screenshot.startsWith('data:image/png;base64,')) {
       throw new AppError('Invalid screenshot format.', 400);
     }
 
-    const feedback = await Feedback.create({
-      type,
-      comment,
-      screenshot
-    });
+    await feedbackService.sendMail({
+      subject: 'Novo Feedback!',
+      body: [
+        '<div style="font-family: sans-serif; font-size: 16px; color: #272727;">',
+        '<h1>Feedback</h1>',
+        `<p>Tipo: ${type}</p>`,
+        `<p>Comentário: ${comment}</p>`,
+        screenshot && ('<p>Screenshot: </p>' && `<img src="${screenshot}" alt="Imagem do print da tela" />`),
+        '</div>',
+      ].join('\n')
 
-    return feedback;
+    });
   }
 }
