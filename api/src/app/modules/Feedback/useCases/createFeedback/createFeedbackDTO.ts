@@ -4,4 +4,5 @@ export interface ICreateFeedback {
   screenshot: string;
   mail: string;
   user?: string;
+  satisfaction: 'BAD' | 'NEUTRAL' | 'GOOD'
 }
