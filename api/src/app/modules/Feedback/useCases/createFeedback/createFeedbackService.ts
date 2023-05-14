@@ -4,13 +4,21 @@ import { SubmitFeedbackService } from '../../../Mail/useCases/submitFeedback/sub
 import { ICreateFeedback } from './createFeedbackDTO';
 
 export class CreateFeedbackService {
-  public async execute({ type, comment, screenshot, mail, user, satisfaction }: ICreateFeedback) {
+  public async execute({ type, comment, screenshot, mail, satisfaction }: ICreateFeedback) {
     if (!type) {
       throw new MissingParamError('Type');
     }
 
     if (!comment) {
       throw new MissingParamError('Comment');
+    }
+
+    if (!satisfaction) {
+      throw new MissingParamError('Satisfaction');
+    }
+
+    if (!mail) {
+      throw new MissingParamError('Email');
     }
 
     const feedbackService = new SubmitFeedbackService;
@@ -27,6 +35,7 @@ export class CreateFeedbackService {
         '<h1>Feedback</h1>',
         `<p>Tipo: ${type}</p>`,
         `<p>Satisfação: ${satisfaction} </p>`,
+        `<p>Email: ${mail} </p>`,
         `<p>Comentário: ${comment}</p>`,
         screenshot && ('<p>Screenshot: </p>' && `<img src="${screenshot}" alt="Imagem do print da tela" />`),
         '</div>',
