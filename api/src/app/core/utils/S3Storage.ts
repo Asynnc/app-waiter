@@ -35,4 +35,10 @@ export class S3Storage {
     fs.promises.unlink(originalPath);
   }
 
+  async deleteFile(fileName: string): Promise<void> {
+    await this.client.deleteObject({
+      Bucket: 'the-coffee-class',
+      Key: fileName,
+    }).promise();
+  }
 }
