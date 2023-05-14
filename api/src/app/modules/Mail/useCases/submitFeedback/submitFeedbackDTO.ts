@@ -1,6 +1,8 @@
 export interface ISendMailData {
   subject: string
   body: string
+  mail?: string;
+  user?: string
 }
 
 

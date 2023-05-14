@@ -3,7 +3,7 @@ import { SubmitFeedbackService } from '../../../Mail/useCases/submitFeedback/sub
 import { ICreateFeedback } from './createFeedbackDTO';
 
 export class CreateFeedbackService {
-  public async execute({ type, comment, screenshot }: ICreateFeedback) {
+  public async execute({ type, comment, screenshot, mail, user }: ICreateFeedback) {
     if (!type) {
       throw new MissingParamError('Type');
     }
@@ -19,6 +19,7 @@ export class CreateFeedbackService {
     }
 
     await feedbackService.sendMail({
+      mail: mail,
       subject: 'Novo Feedback!',
       body: [
         '<div style="font-family: sans-serif; font-size: 16px; color: #272727;">',
@@ -28,7 +29,6 @@ export class CreateFeedbackService {
         screenshot && ('<p>Screenshot: </p>' && `<img src="${screenshot}" alt="Imagem do print da tela" />`),
         '</div>',
       ].join('\n')
-
     });
   }
 }

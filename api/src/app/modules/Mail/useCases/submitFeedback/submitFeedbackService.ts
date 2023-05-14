@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer';
 import { ISendMailData } from './submitFeedbackDTO';
+import { AppError, MissingParamError } from '../../../../core/shared/http/errors';
+import { isValidEmail } from '../../../../core/utils/functions/isValidMail';
 
 const transport = nodemailer.createTransport({
   host: process.env.TRANSPORT_HOST,
@@ -13,19 +15,30 @@ const transport = nodemailer.createTransport({
 });
 
 export class SubmitFeedbackService {
-  public async sendMail({ subject, body }: ISendMailData): Promise<void> {
+  public async sendMail({ subject, body, mail }: ISendMailData): Promise<void> {
+
+    if (!mail) {
+      throw new MissingParamError('Mail');
+    }
+
+    if (!isValidEmail(mail)) {
+      throw new AppError('Invalid mail.');
+    }
 
     try {
       await transport.sendMail({
-        from: process.env.TRANSPORT_AUTH_USER,
-        to: 'tonybsilvadev@gmail.com',
+        from: mail,
+        to: process.env.TRANSPORT_AUTH_USER,
         subject,
         html: body
+      }, (err, info) => {
+        console.log(info.envelope);
+        console.log(info.messageId);
       });
+    } catch (error) {
+      console.table(error);
     }
-    catch (error) {
-      console.log(error);
-    }
-  }
 
+  }
 }
+

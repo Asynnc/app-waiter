@@ -6,11 +6,11 @@ export class CreateFeedbackController {
 
   async handle(request: Request, response: Response) {
 
-    const { type, comment, screenshot } = request.body;
+    const { type, comment, screenshot, mail, user } = request.body;
 
     const createFeedbackService = new CreateFeedbackService;
 
-    const result = await createFeedbackService.execute({ type, comment, screenshot });
+    const result = await createFeedbackService.execute({ type, comment, screenshot, mail, user });
 
     return response.json(result);
   }
