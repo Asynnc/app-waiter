@@ -8,13 +8,15 @@ import globalError from './middlewares/globalError';
 import { LogRequests } from './middlewares/logRequests';
 import './middlewares/tracer';
 import { routes } from './routes';
+import { limiter } from './middlewares/limiter';
+
 
 mongoose.connect(`${process.env.MongoDB_URL_Cloud}`)
   .then(() => console.log('✅ MongoDB Connected!'))
   .catch((err) => console.error(err));
 
 const app = express();
-
+app.use(limiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors());
