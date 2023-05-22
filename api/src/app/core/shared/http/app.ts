@@ -10,7 +10,6 @@ import './middlewares/tracer';
 import { routes } from './routes';
 import { limiter } from './middlewares/limiter';
 
-
 mongoose.connect(`${process.env.MongoDB_URL_Cloud}`)
   .then(() => console.log('✅ MongoDB Connected!'))
   .catch((err) => console.error(err));
