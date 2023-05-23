@@ -4,6 +4,7 @@ import { Product } from '../../../../core/shared/infra/database/mongodb/models/P
 import PDFPrinter from 'pdfmake';
 import { Response } from 'express';
 import { formatCurrency } from '../../../../core/utils/functions/formatCurrency';
+import { getCurrentDate } from '../../../../core/utils/functions/currentDatePT-BR';
 
 export class PdfProductService {
   public async execute(response: Response): Promise<any[] | PDFKit.PDFDocument> {
@@ -26,16 +27,49 @@ export class PdfProductService {
     const printer = new PDFPrinter(fontsPDF);
     const docDefinitions: TDocumentDefinitions = {
       defaultStyle: { font: 'Helvetica' },
+      footer: {
+        text: 'The Coffee Class App', style: 'footer'
+      },
       content: [
         {
+          columns: [
+            { text: 'Menu', style: 'header' },
+            { text: `${getCurrentDate()}\n\n`, style: 'header' }
+          ]
+        },
+        {
           table: {
+            heights: function (row) {
+              return 4;
+            },
             body: [
-              ['ID', 'NAME', 'PRICE', 'INGREDIENTS'],
+              [
+                { text: 'ID', style: 'columnsTitle' },
+                { text: 'NAME', style: 'columnsTitle' },
+                { text: 'PRICE', style: 'columnsTitle' },
+                { text: 'INGREDIENTS', style: 'columnsTitle' }
+              ],
               ...body
             ]
-          }
+          },
+        },
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'center',
+        },
+        columnsTitle: {
+          fontSize: 12,
+          bold: true,
+          alignment: 'center',
+          fillColor: '#FFA500',
+        },
+        footer: {
+          alignment: 'center',
         }
-      ]
+      }
     };
     const pdfDOC = printer.createPdfKitDocument(docDefinitions);
 
