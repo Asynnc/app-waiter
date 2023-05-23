@@ -8,6 +8,7 @@ import fs from 'node:fs';
 import PDFPrinter from 'pdfmake';
 import { fontsPDF } from '../../../config/pdf-make';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
+import { pdfProductController } from '../useCases/pdfProducts';
 
 const productsRouter = Router();
 
@@ -22,28 +23,7 @@ productsRouter.get('/', (request: Request, response: Response) => {
 });
 
 productsRouter.get('/report', (request: Request, response: Response) => {
-  const printer = new PDFPrinter(fontsPDF);
-  const docDefinitions: TDocumentDefinitions = {
-    defaultStyle: { font: 'Helvetica' },
-    content: [
-      { text: 'Meu Primeiro relatório' }
-    ]
-  };
-  const pdfDOC = printer.createPdfKitDocument(docDefinitions);
-
-  // pdfDOC.pipe(fs.createWriteStream('./uploads/products.pdf'));
-
-  const chunks = [];
-
-  pdfDOC.on('data', (chunk) => {
-    chunks.push(chunk);
-  });
-
-  pdfDOC.end();
-  pdfDOC.on('end', () => {
-    const result = Buffer.concat(chunks);
-    response.end(result);
-  });
+  return pdfProductController.handle(request, response);
 });
 
 export { productsRouter };
